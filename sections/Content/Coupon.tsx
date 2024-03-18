@@ -2,11 +2,11 @@
  * @titleBy alt
  */
 export interface Props {
-  code_coupon: String;
+  code_coupon: string;
   /**
    * @description Código do cupom
    */
-  description: String;
+  description: string;
   /**
    * @description Descrição do cupom
    */
