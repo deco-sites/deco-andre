@@ -77,3 +77,5 @@ deno.lock
 # deco files
 .decofile.json
 .metadata/**/*
+
+.deco/
