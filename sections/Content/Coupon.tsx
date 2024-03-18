@@ -12,7 +12,7 @@ export interface Props {
    */
 }
 
-function Coupon(props: Props) {
+export default function Coupon(props: Props) {
   return (
     <section>
       <p>
