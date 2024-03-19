@@ -12,13 +12,13 @@ export interface Props {
    */
 }
 
-export default function Coupon(props: Props) {
+export default function Coupon({ code_coupon, description }: Props) {
   return (
     <section>
       <p>
-        Código do cupom: <strong>{props.code_coupon}</strong>
+        Código do cupom: <strong>{code_coupon}</strong>
       </p>
-      <p>{props.description}</p>
+      <p>{description}</p>
     </section>
   );
 }
