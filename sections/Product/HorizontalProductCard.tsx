@@ -4,6 +4,8 @@ import SliderJS from "deco-sites/deco-andre/islands/SliderJS.tsx";
 import Icon from "deco-sites/deco-andre/components/ui/Icon.tsx";
 import { clx } from "deco-sites/deco-andre/sdk/clx.ts";
 import { useId } from "deco-sites/deco-andre/sdk/useId.ts";
+import { Request } from "std/http/mod.ts";
+import { AppContext } from "deco-sites/deco-andre/apps/site.ts";
 
 export interface Props {
   title: string;
@@ -14,7 +16,73 @@ interface ProductItemProps {
   product: Product;
 }
 
-const ProductItem = ({ product }: ProductItemProps) => {
+export function ErrorFallback({ error }: { error?: Error }) {
+  return (
+    <section class="w-full flex flex-col p-8 justify-center items-center md lg:gap-8 lg:flex-row">
+      <img
+        class="object-contain mb-5 lg:mb-0"
+        width={200}
+        height={200}
+        src="https://10festivalcururusiriri.files.wordpress.com/2011/10/incluart_reduzida3.jpg"
+        alt="Siriri cuiabano"
+      />
+
+      <div>
+        <h3 class="text-2xl">Traje de Siriri Cuiabano</h3>
+        <p>Roupa tradicional para dançar Siriri</p>
+      </div>
+
+      <div>
+        <p>de R$ 250,00</p>
+        <p>por R$ 225</p>
+
+        <a class="link mt-4 block" href="/cultura">Para saber mais</a>
+      </div>
+    </section>
+  );
+}
+
+export function loader(props: Props, req: Request, ctx: AppContext) {
+  if (!props.products || props.products.length === 0) {
+    return {
+      ...props,
+      title: "Carregando",
+      products: [{
+        sku: "1234",
+        "@type": "Product",
+        brand: { "@type": "Brand" },
+        offers: {
+          "@type": "AggregateOffer",
+          offers: [],
+          lowPrice: 0,
+          highPrice: 0,
+          offerCount: 2,
+        },
+        review: [],
+        productID: "123",
+        questions: [],
+        isRelatedTo: [],
+        isSimilarTo: [],
+        isVariantOf: {
+          name: "Carregando...",
+          "@type": "ProductGroup",
+          image: [{ url: "https://placehold.co/200x200" }],
+          hasVariant: [],
+          description: "Carregando...",
+          productGroupID: "1",
+          additionalProperty: [],
+        },
+        aggregateRating: { "@type": "AggregateRating" },
+        additionalProperty: [],
+        isAccessoryOrSparePartFor: [],
+      }],
+    };
+  }
+
+  return props;
+}
+
+function ProductItem({ product }: ProductItemProps) {
   return (
     <article class="w-full flex flex-col justify-center items-center md lg:gap-8 lg:flex-row">
       {product?.isVariantOf?.image && (
@@ -49,7 +117,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
       </div>
     </article>
   );
-};
+}
 
 export default function HorizontalProductCard({ title, products }: Props) {
   const id = useId();
