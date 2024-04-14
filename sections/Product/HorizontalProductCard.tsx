@@ -1,19 +1,26 @@
 import type { Product } from "apps/commerce/types.ts";
-import Slider from "deco-sites/deco-andre/components/ui/Slider.tsx";
-import SliderJS from "deco-sites/deco-andre/islands/SliderJS.tsx";
-import Icon from "deco-sites/deco-andre/components/ui/Icon.tsx";
-import { clx } from "deco-sites/deco-andre/sdk/clx.ts";
-import { useId } from "deco-sites/deco-andre/sdk/useId.ts";
 import { Request } from "std/http/mod.ts";
 import { AppContext } from "deco-sites/deco-andre/apps/site.ts";
 
 export interface Props {
   title: string;
+  animateImage: boolean;
+  imageMaxSize:
+    | "max-w-xl"
+    | "max-w-2xl"
+    | "max-w-3xl"
+    | "max-w-4xl"
+    | "max-w-5xl"
+    | "max-w-6xl"
+    | "max-w-7xl"
+    | "max-w-full";
   products: Product[] | null;
 }
 
 interface ProductItemProps {
   product: Product;
+  imageMaxSize: string;
+  animateImage: boolean;
 }
 
 export function ErrorFallback({ error }: { error?: Error }) {
@@ -21,8 +28,8 @@ export function ErrorFallback({ error }: { error?: Error }) {
     <section class="w-full flex flex-col p-8 justify-center items-center md lg:gap-8 lg:flex-row">
       <img
         class="object-contain mb-5 lg:mb-0"
-        width={200}
-        height={200}
+        width={400}
+        height={400}
         src="https://10festivalcururusiriri.files.wordpress.com/2011/10/incluart_reduzida3.jpg"
         alt="Siriri cuiabano"
       />
@@ -82,22 +89,32 @@ export function loader(props: Props, req: Request, ctx: AppContext) {
   return props;
 }
 
-function ProductItem({ product }: ProductItemProps) {
+function ProductItem(
+  { product, imageMaxSize, animateImage }: ProductItemProps,
+) {
   return (
-    <article class="w-full flex flex-col justify-center items-center md lg:gap-8 lg:flex-row">
+    <article
+      class={`w-full grid grid-cols-1 place-items-center lg:gap-4 lg:grid-cols-[1fr_1fr_auto] ${imageMaxSize}`}
+    >
       {product?.isVariantOf?.image && (
-        <img
-          class="object-contain mb-5 lg:mb-0"
-          width={200}
-          height={200}
-          src={product?.isVariantOf?.image[0]?.url}
-          alt={product?.isVariantOf?.name}
-        />
+        <div class="w-full h-full overflow-hidden mb-5 lg:mb-0">
+          <img
+            class={`w-full h-full object-contain transition-all duration-500 ${
+              animateImage ? "hover:scale-125" : ""
+            }`}
+            width={200}
+            height={200}
+            src={product?.isVariantOf?.image[0]?.url}
+            alt={product?.isVariantOf?.name}
+          />
+        </div>
       )}
 
-      <div>
-        <h3 class="text-2xl">{product?.isVariantOf?.name}</h3>
-        <p>{product?.isVariantOf?.description}</p>
+      <div class="h-full w-full flex flex-col gap-4">
+        <h3 class="text-xl w-full">{product?.isVariantOf?.name}</h3>
+        <p class="w-full line-clamp-4">
+          {product?.isVariantOf?.description}
+        </p>
       </div>
 
       <div>
@@ -119,48 +136,21 @@ function ProductItem({ product }: ProductItemProps) {
   );
 }
 
-export default function HorizontalProductCard({ title, products }: Props) {
-  const id = useId();
-
+export default function HorizontalProductCard(
+  { title, products, imageMaxSize, animateImage }: Props,
+) {
   return (
-    <section
-      id={id}
-      class="w-full flex flex-col justify-center gap-8 px-8 py-10"
-    >
-      <div class="w-full flex justify-between items-center">
-        <h3 class="text-2xl">{title}</h3>
-
-        <div class="flex items-center gap-8">
-          <Slider.PrevButton class="w-12 h-12 flex justify-center items-center">
-            <Icon
-              size={36}
-              id="ChevronRight"
-              strokeWidth={3}
-              class="w-8 h-8 rotate-180"
-            />
-          </Slider.PrevButton>
-
-          <Slider.NextButton class="w-12 h-12 flex justify-center items-center">
-            <Icon size={36} id="ChevronRight" strokeWidth={3} class="w-8 h-8" />
-          </Slider.NextButton>
-        </div>
-      </div>
-
-      <Slider class="carousel carousel-center sm:carousel-end sm:gap-1 row-start-2 row-end-5">
-        {products?.map((product, index) => (
-          <Slider.Item
-            index={index}
-            class={clx(
-              "carousel-item",
-              "md:w-full",
-              "w-full",
-            )}
-          >
-            <ProductItem product={product} />
-          </Slider.Item>
+    <section class="w-full flex flex-col justify-center gap-8 px-8 py-10">
+      <h3 class="text-2xl">{title}</h3>
+      <div class="w-full flex flex-wrap justify-evenly items-center gap-4">
+        {products?.map((product) => (
+          <ProductItem
+            product={product}
+            imageMaxSize={imageMaxSize}
+            animateImage={animateImage}
+          />
         ))}
-      </Slider>
-      <SliderJS rootId={id} infinite />
+      </div>
     </section>
   );
 }
