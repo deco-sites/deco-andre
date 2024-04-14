@@ -1,6 +1,7 @@
 import type { Product } from "apps/commerce/types.ts";
 import { Request } from "std/http/mod.ts";
 import { AppContext } from "deco-sites/deco-andre/apps/site.ts";
+import LikeMachine from "deco-sites/deco-andre/islands/LikeMachine.tsx";
 
 export interface Props {
   title: string;
@@ -132,6 +133,8 @@ function ProductItem(
           Comprar
         </button>
       </div>
+
+      <LikeMachine />
     </article>
   );
 }
