@@ -1,7 +1,7 @@
 import type { Product } from "apps/commerce/types.ts";
 import { Request } from "std/http/mod.ts";
 import { AppContext } from "deco-sites/deco-andre/apps/site.ts";
-import LikeMachine from "deco-sites/deco-andre/islands/LikeMachine.tsx";
+import HorizontalProductCardItem from "deco-sites/deco-andre/sections/Product/HorizontalProductCardItem.tsx";
 
 export interface Props {
   title: string;
@@ -90,64 +90,20 @@ export function loader(props: Props, req: Request, ctx: AppContext) {
   return props;
 }
 
-function ProductItem(
-  { product, imageMaxSize, animateImage }: ProductItemProps,
-) {
-  return (
-    <article
-      class={`w-full grid grid-cols-1 place-items-center lg:gap-4 lg:grid-cols-[1fr_1fr_auto] ${imageMaxSize}`}
-    >
-      {product?.isVariantOf?.image && (
-        <div class="w-full h-full overflow-hidden mb-5 lg:mb-0">
-          <img
-            class={`w-full h-full object-contain transition-all duration-500 ${
-              animateImage ? "hover:scale-125" : ""
-            }`}
-            width={200}
-            height={200}
-            src={product?.isVariantOf?.image[0]?.url}
-            alt={product?.isVariantOf?.name}
-          />
-        </div>
-      )}
-
-      <div class="h-full w-full flex flex-col gap-4">
-        <h3 class="text-xl w-full">{product?.isVariantOf?.name}</h3>
-        <p class="w-full line-clamp-4">
-          {product?.isVariantOf?.description}
-        </p>
-      </div>
-
-      <div>
-        {product?.offers?.highPrice && (
-          <p>
-            de R$ {product?.offers?.highPrice}
-          </p>
-        )}
-
-        <p>
-          {product?.offers?.highPrice && "por "}R$ {product?.offers?.lowPrice}
-        </p>
-
-        <button type="button" class="btn btn-outline  mt-3">
-          Comprar
-        </button>
-      </div>
-
-      <LikeMachine />
-    </article>
-  );
-}
-
 export default function HorizontalProductCard(
-  { title, products, imageMaxSize, animateImage }: Props,
+  {
+    title,
+    products,
+    imageMaxSize,
+    animateImage,
+  }: Props,
 ) {
   return (
     <section class="w-full flex flex-col justify-center gap-8 px-8 py-10">
       <h3 class="text-2xl">{title}</h3>
       <div class="w-full flex flex-wrap justify-evenly items-center gap-4">
         {products?.map((product) => (
-          <ProductItem
+          <HorizontalProductCardItem
             product={product}
             imageMaxSize={imageMaxSize}
             animateImage={animateImage}
