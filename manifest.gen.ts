@@ -2,10 +2,13 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $$$$$$$$$0 from "./actions/camp_api_event.ts";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$2 from "./loaders/availableIcons.ts";
-import * as $$$3 from "./loaders/icons.ts";
+import * as $$$3 from "./loaders/get_product_likes.ts";
+import * as $$$4 from "./loaders/get_total_likes.ts";
+import * as $$$5 from "./loaders/icons.ts";
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$1 from "./loaders/List/Sections.tsx";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
@@ -48,23 +51,26 @@ import * as $$$$$$36 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$37 from "./sections/Miscellaneous/Slide.tsx";
 import * as $$$$$$38 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$39 from "./sections/Product/HorizontalProductCard.tsx";
-import * as $$$$$$40 from "./sections/Product/ImageGalleryFrontBack.tsx";
-import * as $$$$$$41 from "./sections/Product/NotFound.tsx";
-import * as $$$$$$42 from "./sections/Product/NotFoundChallenge.tsx";
-import * as $$$$$$43 from "./sections/Product/ProductDetails.tsx";
-import * as $$$$$$44 from "./sections/Product/ProductShelf.tsx";
-import * as $$$$$$45 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$46 from "./sections/Product/SearchResult.tsx";
-import * as $$$$$$47 from "./sections/Product/ShelfWithImage.tsx";
-import * as $$$$$$48 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$49 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$50 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$51 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$40 from "./sections/Product/HorizontalProductCardItem.tsx";
+import * as $$$$$$41 from "./sections/Product/ImageGalleryFrontBack.tsx";
+import * as $$$$$$42 from "./sections/Product/NotFound.tsx";
+import * as $$$$$$43 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$44 from "./sections/Product/ProductDetails.tsx";
+import * as $$$$$$45 from "./sections/Product/ProductShelf.tsx";
+import * as $$$$$$46 from "./sections/Product/ProductShelfTabbed.tsx";
+import * as $$$$$$47 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$48 from "./sections/Product/ShelfWithImage.tsx";
+import * as $$$$$$49 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$50 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$51 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$52 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
     "deco-sites/deco-andre/loaders/availableIcons.ts": $$$2,
-    "deco-sites/deco-andre/loaders/icons.ts": $$$3,
+    "deco-sites/deco-andre/loaders/get_product_likes.ts": $$$3,
+    "deco-sites/deco-andre/loaders/get_total_likes.ts": $$$4,
+    "deco-sites/deco-andre/loaders/icons.ts": $$$5,
     "deco-sites/deco-andre/loaders/Layouts/ProductCard.tsx": $$$0,
     "deco-sites/deco-andre/loaders/List/Sections.tsx": $$$1,
   },
@@ -112,19 +118,24 @@ const manifest = {
     "deco-sites/deco-andre/sections/Newsletter/Newsletter.tsx": $$$$$$38,
     "deco-sites/deco-andre/sections/Product/HorizontalProductCard.tsx":
       $$$$$$39,
-    "deco-sites/deco-andre/sections/Product/ImageGalleryFrontBack.tsx":
+    "deco-sites/deco-andre/sections/Product/HorizontalProductCardItem.tsx":
       $$$$$$40,
-    "deco-sites/deco-andre/sections/Product/NotFound.tsx": $$$$$$41,
-    "deco-sites/deco-andre/sections/Product/NotFoundChallenge.tsx": $$$$$$42,
-    "deco-sites/deco-andre/sections/Product/ProductDetails.tsx": $$$$$$43,
-    "deco-sites/deco-andre/sections/Product/ProductShelf.tsx": $$$$$$44,
-    "deco-sites/deco-andre/sections/Product/ProductShelfTabbed.tsx": $$$$$$45,
-    "deco-sites/deco-andre/sections/Product/SearchResult.tsx": $$$$$$46,
-    "deco-sites/deco-andre/sections/Product/ShelfWithImage.tsx": $$$$$$47,
-    "deco-sites/deco-andre/sections/Product/Wishlist.tsx": $$$$$$48,
-    "deco-sites/deco-andre/sections/Social/InstagramPosts.tsx": $$$$$$49,
-    "deco-sites/deco-andre/sections/Social/WhatsApp.tsx": $$$$$$50,
-    "deco-sites/deco-andre/sections/Theme/Theme.tsx": $$$$$$51,
+    "deco-sites/deco-andre/sections/Product/ImageGalleryFrontBack.tsx":
+      $$$$$$41,
+    "deco-sites/deco-andre/sections/Product/NotFound.tsx": $$$$$$42,
+    "deco-sites/deco-andre/sections/Product/NotFoundChallenge.tsx": $$$$$$43,
+    "deco-sites/deco-andre/sections/Product/ProductDetails.tsx": $$$$$$44,
+    "deco-sites/deco-andre/sections/Product/ProductShelf.tsx": $$$$$$45,
+    "deco-sites/deco-andre/sections/Product/ProductShelfTabbed.tsx": $$$$$$46,
+    "deco-sites/deco-andre/sections/Product/SearchResult.tsx": $$$$$$47,
+    "deco-sites/deco-andre/sections/Product/ShelfWithImage.tsx": $$$$$$48,
+    "deco-sites/deco-andre/sections/Product/Wishlist.tsx": $$$$$$49,
+    "deco-sites/deco-andre/sections/Social/InstagramPosts.tsx": $$$$$$50,
+    "deco-sites/deco-andre/sections/Social/WhatsApp.tsx": $$$$$$51,
+    "deco-sites/deco-andre/sections/Theme/Theme.tsx": $$$$$$52,
+  },
+  "actions": {
+    "deco-sites/deco-andre/actions/camp_api_event.ts": $$$$$$$$$0,
   },
   "apps": {
     "deco-sites/deco-andre/apps/decohub.ts": $$$$$$$$$$$0,
