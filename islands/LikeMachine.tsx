@@ -1,28 +1,49 @@
-import { signal } from "@preact/signals";
-import { useState } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
+import { invoke } from "deco-sites/deco-andre/runtime.ts";
+import { like_total_count } from "deco-sites/deco-andre/islands/LikeMachineTotal.tsx";
 
-export const like_total_count = signal(0);
+export interface Props {
+  product_id: number;
+}
 
-export default function LikeMachine() {
+export default function LikeMachine({ product_id }: Props) {
+  const [local_likes, set_local_likes] = useState(0);
   const [is_liked, set_is_liked] = useState(false);
 
-  const handle_click = () => {
-    if (!is_liked) {
-      like_total_count.value++;
-    } else {
-      like_total_count.value--;
-    }
+  useEffect(() => {
+    invoke["deco-sites/deco-andre"].loaders.get_product_likes({
+      product_id: product_id,
+    }).then(
+      ({ product_likes }) => {
+        set_local_likes(product_likes);
+      },
+    );
+  }, []);
 
-    set_is_liked((prev) => !prev);
+  const handle_click = async () => {
+    if (!is_liked) {
+      const { success } = await invoke["deco-sites/deco-andre"].actions
+        .camp_api_event({
+          product_id: product_id,
+        });
+
+      if (success) {
+        const { total_likes } = await invoke["deco-sites/deco-andre"].loaders
+          .get_total_likes({});
+
+        like_total_count.value = total_likes;
+
+        set_local_likes((prev) => prev + 1);
+        set_is_liked(true);
+      }
+    }
   };
 
   return (
     <div>
-      <p>{like_total_count.value}</p>
-
       <button
         type="button"
-        class="flex items-center gap-2"
+        class="flex items-center gap-2 btn btn-outline rounded-lg"
         onClick={handle_click}
       >
         {!is_liked
@@ -67,6 +88,8 @@ export default function LikeMachine() {
               <path d="M15 19l2 2l4 -4" />
             </svg>
           )}
+
+        <p>{local_likes}</p>
       </button>
     </div>
   );

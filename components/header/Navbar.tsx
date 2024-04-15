@@ -14,18 +14,18 @@ import Image from "apps/website/components/Image.tsx";
 import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "../../components/header/Header.tsx";
-import { like_total_count } from "deco-sites/deco-andre/islands/LikeMachine.tsx";
 import LikeMachineTotal from "deco-sites/deco-andre/islands/LikeMachineTotal.tsx";
 
 // Make it sure to render it on the server only. DO NOT render it on an island
 function Navbar(
-  { items, searchbar, logo, buttons, logoPosition = "left", device }: {
+  { items, searchbar, logo, buttons, logoPosition = "left", likes, device }: {
     items: SiteNavigationElement[];
     searchbar?: SearchbarProps;
     logo?: Logo;
     buttons?: Buttons;
     logoPosition?: "left" | "center";
     device: "mobile" | "desktop" | "tablet";
+    likes: number;
   },
 ) {
   const platform = usePlatform();
@@ -143,7 +143,7 @@ function Navbar(
           </div>
         )}
 
-        <LikeMachineTotal />
+        <LikeMachineTotal total_likes={likes} />
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ import type { SectionProps } from "deco/types.ts";
 import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
+import { Return } from "deco-sites/deco-andre/loaders/get_total_likes.ts";
 
 export interface Logo {
   src: ImageWidget;
@@ -40,9 +41,12 @@ export interface Props {
   logoPosition?: "left" | "center";
 
   buttons?: Buttons;
+
+  likes: Return;
 }
 
 function Header({
+  likes,
   alerts,
   searchbar,
   navItems = [
@@ -98,6 +102,7 @@ function Header({
               logo={logo}
               logoPosition={logoPosition}
               buttons={buttons}
+              likes={likes.total_likes}
             />
           </div>
         </Drawers>

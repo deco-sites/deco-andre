@@ -1,6 +1,17 @@
-import { like_total_count } from "deco-sites/deco-andre/islands/LikeMachine.tsx";
+import { signal } from "@preact/signals";
+import { useEffect } from "preact/hooks";
 
-export default function LikeMachineTotal() {
+export interface Props {
+  total_likes: number;
+}
+
+export const like_total_count = signal(0);
+
+export default function LikeMachineTotal({ total_likes }: Props) {
+  useEffect(() => {
+    like_total_count.value = total_likes;
+  }, []);
+
   return (
     <div class="flex items-center gap-2">
       <svg
