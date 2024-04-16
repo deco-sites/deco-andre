@@ -1,7 +1,7 @@
-import type { Product } from "apps/commerce/types.ts";
 import { Request } from "std/http/mod.ts";
 import { AppContext } from "deco-sites/deco-andre/apps/site.ts";
 import HorizontalProductCardItem from "deco-sites/deco-andre/sections/Product/HorizontalProductCardItem.tsx";
+import type { ProductVariant } from "../../flags/multivariate/ProductVariant.ts";
 
 export interface Props {
   title: string;
@@ -15,13 +15,7 @@ export interface Props {
     | "max-w-6xl"
     | "max-w-7xl"
     | "max-w-full";
-  products: Product[] | null;
-}
-
-interface ProductItemProps {
-  product: Product;
-  imageMaxSize: string;
-  animateImage: boolean;
+  products: ProductVariant[] | null;
 }
 
 export function ErrorFallback({ error }: { error?: Error }) {
@@ -101,7 +95,7 @@ export default function HorizontalProductCard(
   return (
     <section class="w-full flex flex-col justify-center gap-8 px-8 py-10">
       <h3 class="text-2xl">{title}</h3>
-      <div class="w-full flex flex-wrap justify-evenly items-center gap-4">
+      <div class="w-full flex flex-wrap justify-evenly items-center gap-6">
         {products?.map((product) => (
           <HorizontalProductCardItem
             product={product}

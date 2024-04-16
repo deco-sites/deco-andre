@@ -12,15 +12,12 @@ export default async function camp_api_event(
     headers: {
       "Content-Type": "application/json",
       "x-api-key": "teste123",
-      "x-api-token": "deco-andre",
     },
     credentials: "include",
-    body: JSON.stringify({ productId: product_id }),
+    body: JSON.stringify({ productId: String(product_id) }),
   });
 
   if (!response.ok) return { success: false };
-
-  // const data = await response.json();
 
   return { success: true };
 }

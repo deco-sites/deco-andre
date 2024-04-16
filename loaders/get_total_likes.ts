@@ -11,7 +11,6 @@ export default async function get_total_likes(
     headers: {
       "Content-Type": "application/json",
       "x-api-key": "teste123",
-      "x-api-token": "deco-andre",
     },
     credentials: "include",
   });

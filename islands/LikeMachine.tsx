@@ -35,15 +35,16 @@ export default function LikeMachine({ product_id }: Props) {
 
         set_local_likes((prev) => prev + 1);
         set_is_liked(true);
+        // toast.success("Vote mais e ganhe prêmios!");
       }
     }
   };
 
   return (
-    <div>
+    <>
       <button
         type="button"
-        class="flex items-center gap-2 btn btn-outline rounded-lg"
+        class="btn btn-outline h-full flex flex-col justify-center items-center gap-2 p-2 rounded-lg"
         onClick={handle_click}
       >
         {!is_liked
@@ -91,6 +92,6 @@ export default function LikeMachine({ product_id }: Props) {
 
         <p>{local_likes}</p>
       </button>
-    </div>
+    </>
   );
 }

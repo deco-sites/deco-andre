@@ -5,12 +5,14 @@
 import * as $$$$$$$$$0 from "./actions/camp_api_event.ts";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
+import * as $$$$$$$$0 from "./flags/multivariate/ProductVariant.ts";
 import * as $$$2 from "./loaders/availableIcons.ts";
 import * as $$$3 from "./loaders/get_product_likes.ts";
 import * as $$$4 from "./loaders/get_total_likes.ts";
 import * as $$$5 from "./loaders/icons.ts";
 import * as $$$0 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$1 from "./loaders/List/Sections.tsx";
+import * as $$$$$$$0 from "./matchers/UTM.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Cards/IconCardsCarousel.tsx";
 import * as $$$$$$2 from "./sections/Cards/IconCardsCarouselWithImage.tsx";
@@ -133,6 +135,12 @@ const manifest = {
     "deco-sites/deco-andre/sections/Social/InstagramPosts.tsx": $$$$$$50,
     "deco-sites/deco-andre/sections/Social/WhatsApp.tsx": $$$$$$51,
     "deco-sites/deco-andre/sections/Theme/Theme.tsx": $$$$$$52,
+  },
+  "matchers": {
+    "deco-sites/deco-andre/matchers/UTM.ts": $$$$$$$0,
+  },
+  "flags": {
+    "deco-sites/deco-andre/flags/multivariate/ProductVariant.ts": $$$$$$$$0,
   },
   "actions": {
     "deco-sites/deco-andre/actions/camp_api_event.ts": $$$$$$$$$0,
