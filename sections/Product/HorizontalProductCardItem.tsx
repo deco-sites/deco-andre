@@ -2,6 +2,7 @@ import type { Product } from "apps/commerce/types.ts";
 import { AppContext } from "deco-sites/deco-andre/apps/site.ts";
 import LikeMachine from "deco-sites/deco-andre/islands/LikeMachine.tsx";
 import get_product_likes from "deco-sites/deco-andre/loaders/get_product_likes.ts";
+import AddToCartButton from "deco-sites/deco-andre/components/product/AddToCartButton/vtex.tsx";
 
 interface ProductItemProps {
   product: Product;
@@ -20,8 +21,6 @@ export async function loader(
     req,
     ctx,
   );
-
-  console.log([props.product.productID, likes]);
 
   return ({ ...props, likes: likes.product_likes });
 }
@@ -65,12 +64,19 @@ export default function HorizontalProductCardItem(
           {product?.offers?.highPrice && "por "}R$ {product?.offers?.lowPrice}
         </p>
 
-        <button
-          type="button"
-          class="btn btn-outline uppercase font-semibold rounded-lg"
-        >
-          Comprar
-        </button>
+        <div class="btn btn-outline uppercase font-semibold rounded-lg">
+          <AddToCartButton
+            seller="1"
+            productID={product.productID}
+            eventParams={{
+              items: [{
+                item_id: product.sku,
+                item_name: product?.isVariantOf?.name,
+                quantity: 1,
+              }],
+            }}
+          />
+        </div>
       </div>
 
       <div class="mt-auto">

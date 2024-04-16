@@ -35,7 +35,7 @@ export default function LikeMachine({ product_id }: Props) {
 
         set_local_likes((prev) => prev + 1);
         set_is_liked(true);
-        // toast.success("Vote mais e ganhe prêmios!");
+        globalThis.alert("Vote mais e ganhe prêmios!");
       }
     }
   };
