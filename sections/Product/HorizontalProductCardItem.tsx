@@ -31,12 +31,12 @@ export default function HorizontalProductCardItem(
 ) {
   return (
     <article
-      class={`w-full grid grid-cols-1 place-items-center lg:gap-4 lg:grid-cols-[1fr_1fr_auto] ${imageMaxSize}`}
+      class={`w-full grid grid-cols-1 gap-2 place-items-center lg:gap-4 lg:grid-cols-[1fr_1fr_auto_auto] ${imageMaxSize}`}
     >
       {product?.isVariantOf?.image && (
         <div class="w-full h-full overflow-hidden mb-5 lg:mb-0">
           <img
-            class={`w-full h-full object-contain transition-all duration-500 ${
+            class={`w-full h-full object-contain rounded-lg transition-all duration-500 ${
               animateImage ? "hover:scale-125" : ""
             }`}
             width={200}
@@ -49,28 +49,33 @@ export default function HorizontalProductCardItem(
 
       <div class="h-full w-full flex flex-col gap-4">
         <h3 class="text-xl w-full">{product?.isVariantOf?.name}</h3>
-        <p class="w-full line-clamp-4">
+        <p class="w-full line-clamp-3">
           {product?.isVariantOf?.description}
         </p>
       </div>
 
-      <div>
+      <div class="h-full flex flex-col justify-between">
         {product?.offers?.highPrice && (
-          <p>
+          <p class="line-through">
             de R$ {product?.offers?.highPrice}
           </p>
         )}
 
-        <p>
+        <p class="text-lg font-semibold">
           {product?.offers?.highPrice && "por "}R$ {product?.offers?.lowPrice}
         </p>
 
-        <button type="button" class="btn btn-outline  mt-3">
+        <button
+          type="button"
+          class="btn btn-outline uppercase font-semibold rounded-lg"
+        >
           Comprar
         </button>
       </div>
 
-      <LikeMachine product_id={Number(product.productID)} />
+      <div class="mt-auto">
+        <LikeMachine product_id={Number(product.productID)} />
+      </div>
     </article>
   );
 }
