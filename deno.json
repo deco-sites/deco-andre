@@ -1,8 +1,8 @@
 {
   "imports": {
     "deco-sites/deco-andre/": "./",
-    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.60.25/",
-    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.36.0/",
+    "deco/": "https://cdn.jsdelivr.net/gh/deco-cx/deco@1.61.3/",
+    "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.36.7/",
     "$fresh/": "https://deno.land/x/fresh@1.6.5/",
     "preact": "https://esm.sh/preact@10.19.2",
     "preact/": "https://esm.sh/preact@10.19.2/",
@@ -11,7 +11,9 @@
     "@preact/signals-core": "https://esm.sh/*@preact/signals-core@1.5.0",
     "std/": "https://deno.land/std@0.190.0/",
     "partytown/": "https://cdn.jsdelivr.net/gh/deco-cx/partytown@0.4.8/",
-    "daisyui": "npm:daisyui@4.6.0"
+    "daisyui": "npm:daisyui@4.6.0",
+    "react": "https://esm.sh/preact@10.19.2/compat",
+    "toastify-js": "npm:toastify-js@1.12.0"
   },
   "tasks": {
     "start": "deno task generate-icons && deno task bundle && deno run -A --unstable --env --watch=tailwind.css,sections/,functions/,loaders/,actions/,workflows/,accounts/,.env dev.ts",
