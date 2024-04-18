@@ -1,6 +1,8 @@
 import { useEffect, useState } from "preact/hooks";
 import { invoke } from "deco-sites/deco-andre/runtime.ts";
 import { like_total_count } from "deco-sites/deco-andre/islands/LikeMachineTotal.tsx";
+import Toastify from "toastify-js";
+import { Head } from "$fresh/runtime.ts";
 
 export interface Props {
   product_id: number;
@@ -35,13 +37,31 @@ export default function LikeMachine({ product_id }: Props) {
 
         set_local_likes((prev) => prev + 1);
         set_is_liked(true);
-        globalThis.alert("Vote mais e ganhe prêmios!");
+
+        Toastify({
+          text: "Obrigado pelo voto!",
+          position: "left",
+          gravity: "bottom",
+          offset: {
+            x: "20px",
+            y: "20px",
+          },
+        }).showToast();
       }
     }
   };
 
   return (
     <>
+      <Head>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+        >
+        </link>
+      </Head>
+
       <button
         type="button"
         class="btn btn-outline h-full flex flex-col justify-center items-center gap-2 p-2 rounded-lg"
