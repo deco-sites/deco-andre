@@ -3,6 +3,7 @@ import { AppContext } from "deco-sites/deco-andre/apps/site.ts";
 import LikeMachine from "deco-sites/deco-andre/islands/LikeMachine.tsx";
 import get_product_likes from "deco-sites/deco-andre/loaders/get_product_likes.ts";
 import AddToCartButton from "deco-sites/deco-andre/islands/AddToCartButton/vtex.tsx";
+import Image from "apps/website/components/Image.tsx";
 
 interface ProductItemProps {
   product: Product;
@@ -34,14 +35,15 @@ export default function HorizontalProductCardItem(
     >
       {product?.isVariantOf?.image && (
         <div class="w-full h-full overflow-hidden mb-5 lg:mb-0">
-          <img
+          <Image
             class={`w-full h-full object-contain rounded-lg transition-all duration-500 ${
               animateImage ? "hover:scale-125" : ""
             }`}
             width={200}
             height={200}
-            src={product?.isVariantOf?.image[0]?.url}
+            src={product?.isVariantOf?.image[0]?.url ?? ""}
             alt={product?.isVariantOf?.name}
+            loading="eager"
           />
         </div>
       )}
